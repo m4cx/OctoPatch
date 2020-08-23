@@ -4,7 +4,9 @@ on:
   push:
     branches: [master, develop, feature/*]
 
-
+env: 
+  SONAR_PROJECT_KEY: "m4cx_OctoPatch"
+  SONAR_ORGANIZATION_KEY: "m4cx-github"
 
 jobs:
   scan:
@@ -26,8 +28,8 @@ jobs:
 
       - name: Scan
         run: |
-          dotnet sonarscanner begin /k:"m4cx_OctoPatch" /o:"m4cx-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build OctoPatch.sln
+          dotnet sonarscanner begin /k:"${{env.SONAR_PROJECT_KEY}}" /o:"${{env.SONAR_ORGANIZATION_KEY}}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet test OctoPatch.sln --collect "Code Coverage"
           dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
