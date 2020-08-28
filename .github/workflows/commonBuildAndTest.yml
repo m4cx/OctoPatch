@@ -64,7 +64,7 @@ jobs:
         run: |
           dotnet sonarscanner begin /k:"${{env.SONAR_PROJECT_KEY}}" /o:"${{env.SONAR_ORGANIZATION_KEY}}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ env.SONAR_HOST_URL }}"
           dotnet build OctoPatch.sln
-          dotnet test OctoPatch.sln --collect "Code Coverage"
+          dotnet test OctoPatch.sln --collect:"XPlat Code Coverage"
           dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
