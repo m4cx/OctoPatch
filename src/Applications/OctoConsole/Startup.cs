@@ -48,7 +48,7 @@ namespace OctoConsole
 
             app.UseCors(options =>
                 options.AllowAnyHeader().AllowCredentials()
-                    .WithOrigins("https://ausliebezumcode.github.io"));
+                    .WithOrigins("https://ausliebezumcode.github.io", "http://localhost:4200"));
 
             app.UseRouting();
             app.UseStaticFiles();
